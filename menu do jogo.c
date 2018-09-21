@@ -1,9 +1,11 @@
 #include<stdio.h>
+#include<stdlib.h>
 
 //menu do jogo
 int main(){
 
 	int menu1, dificuldade;
+	char c_get;
 
 	printf("--------------------------------\n");//30linhas
 	printf("--------------MENU--------------\n");
@@ -30,7 +32,7 @@ int main(){
 			d - direita
 			*/
 			printf("Pressione enter para continuar.\n");
-			getch();
+			getchar();
 			printf("jogo iniciado");//iniciar o jogo.
 			break;
 		}
@@ -42,7 +44,7 @@ int main(){
 			printf("3o - %s\t%d\n");
 			printf("Pressione enter para voltar.\n");
 			printf("--------------------------------\n");
-			getch();
+			getchar();
 			printf("voltou");//return menu_jogo;
 
 			break;
