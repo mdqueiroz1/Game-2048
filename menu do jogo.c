@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+#include<conio.h>
 
 //menu do jogo
 int main(){
@@ -17,14 +18,18 @@ int main(){
 
 	do{
 	scanf("%d", &menu1);
+		if(menu1<=0||menu1>4){
+			printf("Numero de menu invalido.\n");
+		}
 	}while(menu1<=0||menu1>4);
-
+	//clrscr();//limpar a tela do prompt, comando da biblioteca conio.c
+	
 	switch(menu1){
 		case 1:{
 			printf("Bem Vindo!");
 			printf("Informe o nome de usuário:\n");
 
-			printf("Instruções: ... ... ...");
+			printf("Instruções: \nw - cima\na - esquerda\ns- baixo\nd - direita\np - salvar e sair\n");
 			/*
 			w - cima
 			a - esquerda
