@@ -1,11 +1,10 @@
-//menu do jogo
 #include<stdio.h>
 
-
+//menu do jogo
 int main(){
-	
+
 	int menu1, dificuldade;
-	
+
 	printf("--------------------------------\n");//30linhas
 	printf("--------------MENU--------------\n");
 	printf("--------------------------------\n");
@@ -13,19 +12,19 @@ int main(){
 	printf("2- Ver Recordes\n");
 	printf("3- Definir Dificuldade\n");
 	printf("--------------------------------\n");
-	
+
 	do{
-	scanf("%d", menu1);
+	scanf("%d", &menu1);
 	}while(menu1<=0||menu1>4);
-	
+
 	switch(menu1){
 		case 1:{
 			printf("Bem Vindo!");
 			printf("Informe o nome de usuário:\n");
-			
+
 			printf("Instruções: ... ... ...");
 			/*
-			w - cima 
+			w - cima
 			a - esquerda
 			s - baixo
 			d - direita
@@ -45,7 +44,7 @@ int main(){
 			printf("--------------------------------\n");
 			getch();
 			printf("voltou");//return menu_jogo;
-			
+
 			break;
 		}
 		case 3:{
@@ -55,19 +54,19 @@ int main(){
 			printf("2- Medio\n");
 			printf("3- Dificil\n");
 			printf("--------------------------------\n");
-				
+
 				do{
 					printf("Selecione a dificuldade.\n");
-					scanf("%d",dificuldade);
+					scanf("%d",&dificuldade);
 					if(dificuldade<=0||dificuldade>3){
 						printf("Numero de dificuldade invalido.\n");
 					}
 				}while(dificuldade<=0||dificuldade>3);
-				
-			
+
+
 			break;
 		}
 	}
-	
+
 	return 0;
 }
