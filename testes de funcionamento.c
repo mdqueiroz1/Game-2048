@@ -4,7 +4,7 @@
 
 int main(){
 	
-	int lin,col,i,j,cont=0,tabela[4][4],cont_jogadas=0,inicio,r2ou4;
+	int lin,col,cont=0,tabela[4][4],cont_jogadas=0,inicio=0,r2ou4;
 	
 	for(lin=0;lin<4;lin++){
 		for(col=0;col<4;col++){
@@ -12,7 +12,7 @@ int main(){
 		}
 	}
 	
-	for(inicio=0;inicio<2;inicio++){	
+	do{	
 		srand(time(NULL));//se deixar o time(null) fora chega no resultado mais rápido.
 	
 		do{
@@ -31,8 +31,9 @@ int main(){
 			tabela[lin][col]=r2ou4;
 		}
 		cont_jogadas++;
-	}
-	//seleção de cor para o jogo.
+		inicio++;
+	}while(inicio<2);
+	
 	if(cont<=8){
 		system("color 0A");
 	}
@@ -42,26 +43,24 @@ int main(){
 	if(cont==16){
 		system("color 0C");
 	}
-	
-	
-	
-	//impressão da tabela do jogo
 		printf("\n ---------------------------------------------------------------\n");
-	for(lin=0;lin<4;lin++){
-		printf("|\t \t|\t \t|\t \t|\t \t|\n|");
-		for(col=0;col<4;col++){
-			if(tabela[lin][col] == 0){
-				printf("\t \t|");
-			}else{
-				printf("\t%d\t|",tabela[lin][col]);
+		for(lin=0;lin<4;lin++){
+			printf("|\t \t|\t \t|\t \t|\t \t|\n|");
+			for(col=0;col<4;col++){
+				if(tabela[lin][col] == 0){
+					printf("\t \t|");
+				}else{
+					printf("\t%d\t|",tabela[lin][col]);
+				}
 			}
-		}
-		printf("\n|\t \t|\t \t|\t \t|\t \t|");
-		printf("\n ---------------------------------------------------------------\n");
-	}
-	if(cont==16){
-		printf("Voce perdeu!\nPontuacao: \n");//colocar pontuação
-	}
+			printf("\n|\t \t|\t \t|\t \t|\t \t|");
+			printf("\n ---------------------------------------------------------------\n");
+		
+			if(cont==16){
+				printf("Voce perdeu!\nPontuacao: \n");//colocar pontuação
+			}
 	
+		}
+
 	return 0;
 }
