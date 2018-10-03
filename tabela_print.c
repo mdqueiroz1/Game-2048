@@ -1,6 +1,26 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.c>
+#include<conio.h>
+
+void Printar(int tab[4][4]){
+			
+	int lin, col;
+	
+			printf("\n ---------------------------------------------------------------\n");
+	for(lin=0;lin<4;lin++){
+		printf("|\t \t|\t \t|\t \t|\t \t|\n|");
+		for(col=0;col<4;col++){
+			if(tab[lin][col] == 0){
+				printf("\t \t|");
+			}else{
+				printf("\t%d\t|",tab[lin][col]);
+			}
+		}
+		printf("\n|\t \t|\t \t|\t \t|\t \t|");
+		printf("\n ---------------------------------------------------------------\n");
+	}
+}
 
 int main(){
 	
@@ -59,6 +79,8 @@ int main(){
 		printf("\n|\t \t|\t \t|\t \t|\t \t|");
 		printf("\n ---------------------------------------------------------------\n");
 	}
+
+	Printar(tabela);
 	if(cont==16){
 		printf("Voce perdeu!\nPontuacao: \n");//colocar pontuação
 	}

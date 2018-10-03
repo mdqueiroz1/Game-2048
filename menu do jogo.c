@@ -148,14 +148,15 @@ void game_start(){
 		tabela[lin][col]=r2ou4;
 	}
 
-	funcionamento(tabela[4][4]);
+	funcionamento(tabela,2,0);
 
 	return ;
 }
 
-void funcionamento(int tabela[4][4]){//não testado, terminar o retorno e recursão.
+int funcionamento(int tabela[4][4], int cont, int cont_jogadas){//não testado, terminar o retorno e recursão.
 	
-	int lin,col,cont,r2ou4;
+	int lin,col,r2ou4;
+	char jogada;
 	
 	srand(time(NULL));	
 	do{
@@ -172,13 +173,12 @@ void funcionamento(int tabela[4][4]){//não testado, terminar o retorno e recursã
 	}else{
 		tabela[lin][col]=r2ou4;
 	}
-	cont_jogadas++;
 	
 	if(cont<=8){
 		system("color 0A");
 	}else if(cont>8){
 				system("color 0E");
-			}else if(cont==16){
+			}else if(cont<=15){
 						system("color 0C");
 					}
 					
@@ -197,10 +197,37 @@ void funcionamento(int tabela[4][4]){//não testado, terminar o retorno e recursã
 		printf("\n ---------------------------------------------------------------\n");
 	}
 	
-	if(cont!=16){
-		funcionamento(tabela[4][4]);
-	}else{
+	scanf("%c", &jogada);
+	switch(jogada){
+		case 'a':{
+			
+			break;
+		}
+		case 'd':{
+			
+			break;
+		}
+		case 'w':{
+			
+			break;
+		}
+		case 's':{
+			
+			break;
+		}
+		case 'p':{
+			//inserir save do jogo
+			return 0;
+			break;
+		}
+	}
+	printf("%d %d",cont,cont_jogadas);
+	system("cls");
+	if(cont==16){
 		printf("Voce perdeu!\nPontuacao: \n");//colocar pontuação
+		return 0;
+	}else{ 
+		return funcionamento(tabela,cont+=1,cont_jogadas+=1);
 	}
 	
 }
