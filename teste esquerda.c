@@ -11,7 +11,8 @@ int main(){
 			tabela[lin][col] = 0;
 		}
 	}
-	
+	tabela[1][3]=2;
+	tabela[1][2]=2;
 	for(j=0;j<4;j++){
 		for(i=0;i<4;i++){
 			printf("%d",tabela[j][i]);

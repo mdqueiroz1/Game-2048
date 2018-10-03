@@ -196,25 +196,52 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas){//não testado, t
 		printf("\n|\t \t|\t \t|\t \t|\t \t|");
 		printf("\n ---------------------------------------------------------------\n");
 	}
-	
+	do{
 	scanf("%c", &jogada);
+	}while(jogada!='a'||jogada!='s'||jogada!='d'||jogada!='w'||jogada!='p');
+	
 	switch(jogada){
+	
 		case 'a':{
-			
+		//esquerda
+			for(lin=0;lin<4;lin++){
+				for(i=0;i<4;i++){
+					for(j=1;j<4;j++){
+						if(i!=j){
+							if(tabela[lin][i]==tabela[lin][j]){
+								tabela[lin][j]=tabela[lin][i]+tabela[lin][j];
+								tabela[lin][i]=0;
+							}
+						}
+					}
+				}
+				for(i=0;i<4;i++){
+					for(j=0;j<3;j++){
+						if(tabela[lin][j]==0){
+							tabela[lin][j]=tabela[lin][j+1];
+							tabela[lin][j+1]=0;
+						}
+					}
+				}
+			}
 			break;
 		}
+	
 		case 'd':{
-			
+			//direita
 			break;
 		}
+	
 		case 'w':{
-			
+			//cima
 			break;
 		}
+	
 		case 's':{
-			
+			//baixo
 			break;
 		}
+	
 		case 'p':{
 			//inserir save do jogo
 			return 0;
