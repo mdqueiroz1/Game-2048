@@ -2,9 +2,11 @@
 #include<stdlib.h>
 #include<conio.c>
 
+int tabela[4][4];
+
 int main(){
 	
-	int lin,col,cont=0,tabela[4][4],cont_jogadas=0,inicio=0,r2ou4;
+	int lin,col,cont=0,cont_jogadas=0,inicio=0,r2ou4;
 	
 	for(lin=0;lin<4;lin++){
 		for(col=0;col<4;col++){

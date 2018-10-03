@@ -7,41 +7,7 @@ mudar as cores do prompt para mostrar que o jogador está prestes a perder.
 sequencia de cores:verde, amarelo, vermelho. 
 */
 
-int main(){
-	system("color 0A");//mudar a prompt p preto com verde
-	
-	int menu_jogo(void);//menu principal
-	void inicio_jogo(void);//1
-	void recordes(void);//2	
-	void dificuldade_jogo(void);//3
-	void game_start(void);
-		
-	int menu1;	
-	do{
-		system("cls");//limpar a tela do prompt
-		menu1= menu_jogo();
-		system("cls");
-		
-		switch(menu1){
-			case 1:{
-				inicio_jogo();
-				break;
-					}
-			case 2:{
-				recordes();
-				break;
-			}
-			case 3:{
-				dificuldade_jogo();
-				break;
-			}
-		}
-	}while(menu1!=1);//1 inicia o jogo
-	
-	return 0;
-}
-
-int menu_jogo(void){
+int menu_jogo(){
 	
 	int menu1;
 	
@@ -63,10 +29,10 @@ int menu_jogo(void){
 
 }
 
-void inicio_jogo(void){
+void inicio_jogo(){
 
 	char usuario[10],confirma_usuario,save_usuario[10];
-	void game_start(void);
+	void game_start();
 	
 	printf("Bem Vindo!\n");
 	printf("Informe o nome de usuario:\n");
@@ -87,7 +53,7 @@ void inicio_jogo(void){
 	}
 }
 
-void recordes(void){
+void recordes(){
 	printf("--------------------------------\n");
 	printf("Recordes:\n");
 	printf("1o - %s\t%d\n");//adicionar usuário do jogo já salvo e recorde do mesmo.
@@ -105,7 +71,7 @@ void recordes(void){
 	return ;
 }
 
-void dificuldade_jogo(void){
+int dificuldade_jogo(){
 	
 	int dificuldade;
 	char confirma_dificuldade;
@@ -150,14 +116,124 @@ void dificuldade_jogo(void){
 		scanf("%c",&confirma_dificuldade);
 	}while(confirma_dificuldade!= 'S'&&confirma_dificuldade!= 's');
 	
-		return ;
+		return dificuldade;
 }
-/*
-se houver uma sequencia de 4 numeros iguais, eles deverão ser adicionados com dois comandos,
-e não apenas com um.
-*/
+
 void game_start(){
 	printf("\n\n~jogo iniciado~\n\n");
-	printf("teste completo!\n");
+	system("cls");
+	int lin,col,i,j,cont=0,tabela[4][4],cont_jogadas=0,pontuacao,inicio,r2ou4;
+	
+	for(lin=0;lin<4;lin++){
+		for(col=0;col<4;col++){
+			tabela[lin][col] = 0;
+		}
+	}
+		
+	srand(time(NULL));//se deixar o time(null) fora chega no resultado mais rápido.
+	
+	do{
+		lin=rand()%4;
+		col=rand()%4;
+	}while(tabela[lin][col]!=0);
+		
+	do{
+		r2ou4=rand()%4;
+	}while(r2ou4%2!=0);
+			
+			
+	if(r2ou4 == 0){
+		tabela[lin][col]=2;
+	}else{
+		tabela[lin][col]=r2ou4;
+	}
+
+	funcionamento(tabela[4][4]);
+
+	return ;
 }
+
+void funcionamento(int tabela[4][4]){//não testado, terminar o retorno e recursão.
+	
+	int lin,col,cont,r2ou4;
+	
+	srand(time(NULL));	
+	do{
+		lin=rand()%4;
+		col=rand()%4;
+	}while(tabela[lin][col]!=0);
+
+	do{
+		r2ou4=rand()%4;
+	}while(r2ou4%2!=0);
+				
+	if(r2ou4 == 0){
+		tabela[lin][col]=2;
+	}else{
+		tabela[lin][col]=r2ou4;
+	}
+	cont_jogadas++;
+	
+	if(cont<=8){
+		system("color 0A");
+	}else if(cont>8){
+				system("color 0E");
+			}else if(cont==16){
+						system("color 0C");
+					}
+					
+	//impressão da tabela do jogo
+		printf("\n ---------------------------------------------------------------\n");
+	for(lin=0;lin<4;lin++){
+		printf("|\t \t|\t \t|\t \t|\t \t|\n|");
+		for(col=0;col<4;col++){
+			if(tabela[lin][col] == 0){
+				printf("\t \t|");
+			}else{
+				printf("\t%d\t|",tabela[lin][col]);
+			}
+		}
+		printf("\n|\t \t|\t \t|\t \t|\t \t|");
+		printf("\n ---------------------------------------------------------------\n");
+	}
+	
+	if(cont!=16){
+		funcionamento(tabela[4][4]);
+	}else{
+		printf("Voce perdeu!\nPontuacao: \n");//colocar pontuação
+	}
+	
+}
+
+int main(){
+	system("color 0A");//mudar a prompt p preto com verde
+	
+	int dificuldade;
+		
+	int menu1;
+	do{
+		system("cls");//limpar a tela do prompt
+		menu1= menu_jogo();
+		system("cls");
+		
+		switch(menu1){
+			case 1:{
+				inicio_jogo();
+				break;
+					}
+			case 2:{
+				recordes();
+				break;
+			}
+			case 3:{
+				dificuldade=dificuldade_jogo();
+				break;
+			}
+		}
+	}while(menu1!=1);//1 inicia o jogo
+	
+	return 0;
+}
+
+
 
