@@ -165,7 +165,7 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20])
 	}while(tabela[lin][col]!=0);
 
 	do{
-		r2ou4=rand()%4;
+		r2ou4=rand()%5;
 	}while(r2ou4%2!=0);
 				
 	if(r2ou4 == 0){
