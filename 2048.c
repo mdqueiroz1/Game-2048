@@ -49,7 +49,7 @@ void inicio_jogo(){
 		printf("Instrucoes: \n\n\tW - Cima\n\nA - Esquerda\tD - Direita\n\n\tS - Baixo\n\nP - Salvar e sair\n");
 		printf("Pressione enter para continuar.\n");
 		getch();
-		game_start();
+		game_start(usuario);
 	}
 }
 
@@ -119,7 +119,7 @@ int dificuldade_jogo(){
 		return dificuldade;
 }
 
-void game_start(){
+void game_start(char jogador[20]){
 	printf("\n\n~jogo iniciado~\n\n");
 	system("cls");
 	int lin,col,i,j,cont=0,tabela[4][4],cont_jogadas=0,pontuacao,inicio,r2ou4;
@@ -148,14 +148,14 @@ void game_start(){
 		tabela[lin][col]=r2ou4;
 	}
 
-	funcionamento(tabela,2,0);
+	funcionamento(tabela,2,0,jogador);
 
 	return ;
 }
 
-int funcionamento(int tabela[4][4], int cont, int cont_jogadas){//não testado, terminar o retorno e recursão.
+int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20]){//não testado, terminar o retorno e recursão.
 	
-	int lin,col,r2ou4;
+	int lin,col,r2ou4,i,j,pontuacao=0;
 	char jogada;
 	
 	srand(time(NULL));	
@@ -176,13 +176,14 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas){//não testado, t
 	
 	if(cont<=8){
 		system("color 0A");
-	}else if(cont>8){
+	}else if(cont>8&&cont<15){
 				system("color 0E");
-			}else if(cont<=15){
+			}else if(cont>=15){
 						system("color 0C");
 					}
 					
 	//impressão da tabela do jogo
+	printf("Jogador:%s",jogador);
 		printf("\n ---------------------------------------------------------------\n");
 	for(lin=0;lin<4;lin++){
 		printf("|\t \t|\t \t|\t \t|\t \t|\n|");
@@ -197,19 +198,25 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas){//não testado, t
 		printf("\n ---------------------------------------------------------------\n");
 	}
 	do{
-	scanf("%c", &jogada);
-	}while(jogada!='a'||jogada!='s'||jogada!='d'||jogada!='w'||jogada!='p');
+		fflush(stdin);
+		printf("Jogada: ");
+		scanf("%c",&jogada);
+		jogada=tolower(jogada);
+		fflush(stdin);
+	}while(jogada!='a' && jogada!='s'&& jogada!='d'&& jogada!='w' && jogada!='p');
 	
 	switch(jogada){
 	
 		case 'a':{
-		//esquerda
+		//esquerda(pronto)
+		printf("esquerda\n");
 			for(lin=0;lin<4;lin++){
 				for(i=0;i<4;i++){
 					for(j=1;j<4;j++){
 						if(i!=j){
 							if(tabela[lin][i]==tabela[lin][j]){
 								tabela[lin][j]=tabela[lin][i]+tabela[lin][j];
+								pontuacao=pontuacao+tabela[lin][j];
 								tabela[lin][i]=0;
 							}
 						}
@@ -228,17 +235,80 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas){//não testado, t
 		}
 	
 		case 'd':{
-			//direita
+			//direita(pronto)
+			for(lin=3;lin>=0;lin--){
+				for(i=3;i>=0;i--){
+					for(j=3;j>=0;j--){
+						if(i!=j){
+							if(tabela[lin][i]==tabela[lin][j]){
+								tabela[lin][j]=tabela[lin][i]+tabela[lin][j];
+								pontuacao=pontuacao+tabela[lin][j];
+								tabela[lin][i]=0;
+							}
+						}
+					}
+				}
+				for(i=3;i>=0;i--){
+					for(j=3;j>=1;j--){
+						if(tabela[lin][j]==0){
+							tabela[lin][j]=tabela[lin][j-1];
+							tabela[lin][j-1]=0;
+						}
+					}
+				}
+			}
 			break;
 		}
 	
 		case 'w':{
-			//cima
+			//cima(pronto)
+			for(lin=0;lin<4;lin++){
+				for(i=0;i<4;i++){
+					for(j=1;j<4;j++){
+						if(i!=j){
+							if(tabela[i][lin]==tabela[j][lin]){
+								tabela[j][lin]=tabela[i][lin]+tabela[j][lin];
+								pontuacao=pontuacao+tabela[j][lin];
+								tabela[i][lin]=0;
+							}
+						}
+					}
+				}
+				for(i=0;i<4;i++){
+					for(j=0;j<3;j++){
+						if(tabela[j][lin]==0){
+							tabela[j][lin]=tabela[j+1][lin];
+							tabela[j+1][lin]=0;
+						}
+					}
+				}
+			}
 			break;
 		}
 	
 		case 's':{
-			//baixo
+			//baixo(pronto)
+			for(lin=3;lin>=0;lin--){
+				for(i=3;i>=0;i--){
+					for(j=3;j>=0;j--){
+						if(i!=j){
+							if(tabela[i][lin]==tabela[j][lin]){
+								tabela[j][lin]=tabela[i][lin]+tabela[j][lin];
+								pontuacao=pontuacao+tabela[j][lin];
+								tabela[i][lin]=0;
+							}
+						}
+					}
+				}
+				for(i=3;i>=0;i--){
+					for(j=3;j>=1;j--){
+						if(tabela[j][lin]==0){
+							tabela[j][lin]=tabela[j-1][lin];
+							tabela[j-1][lin]=0;
+						}
+					}
+				}
+			}
 			break;
 		}
 	
@@ -248,13 +318,23 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas){//não testado, t
 			break;
 		}
 	}
-	printf("%d %d",cont,cont_jogadas);
+
 	system("cls");
+	
+	cont=0;//contagem de espacos vazios
+	for(i=0;i<4;i++){
+		for(j=0;j<4;j++){
+			if(tabela[i][j]!=0){
+				cont++;
+			}
+		}
+	}
+	
 	if(cont==16){
-		printf("Voce perdeu!\nPontuacao: \n");//colocar pontuação
+		printf("Voce perdeu %s!\nPontuacao: %d \n",jogador,pontuacao);//colocar pontuação
 		return 0;
 	}else{ 
-		return funcionamento(tabela,cont+=1,cont_jogadas+=1);
+		return funcionamento(tabela,cont,cont_jogadas+=1,jogador);
 	}
 	
 }
