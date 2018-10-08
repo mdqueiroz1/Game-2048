@@ -27,7 +27,7 @@ int menu_jogo(){
 
 void inicio_jogo(){
 
-	char usuario[10],confirma_usuario,save_usuario[10];
+	char usuario[20],confirma_usuario,save_usuario[20];
 	void game_start();
 	
 	printf("Bem Vindo!\n");
@@ -72,12 +72,6 @@ int dificuldade_jogo(){
 	int dificuldade;
 	char confirma_dificuldade;
 	
-	/*
-	na seleção de dificuldade adicionar e tentar rodar zoeira na escolha do usuario.
-	dificil - Mas cê é o bixão mesmo hein?
-	medio - ?
-	facil - Vejo que temos um bebezao por aqui!
-	*/
 	printf("--------------------------------\n");
 	printf("Dificuldade:\n");
 	printf("1- Facil\n");
@@ -108,7 +102,6 @@ int dificuldade_jogo(){
 		
 		printf("Voce selecionou a dificuldade %d, esta correto?(S/N)\n",dificuldade);
 		fflush(stdin);
-		//confirma_dificuldade=getch();
 		scanf("%c",&confirma_dificuldade);
 	}while(confirma_dificuldade!= 'S'&&confirma_dificuldade!= 's');
 	
@@ -126,7 +119,7 @@ void game_start(char jogador[20]){
 		}
 	}
 		
-	srand(time(NULL));//se deixar o time(null) fora chega no resultado mais rápido.
+	srand(time(NULL));
 	
 	do{
 		lin=rand()%4;
@@ -193,6 +186,7 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 		printf("\n|\t \t|\t \t|\t \t|\t \t|");
 		printf("\n ---------------------------------------------------------------\n");
 	}
+	printf("%d",cont);
 	do{
 		fflush(stdin);
 		printf("Jogada: ");
@@ -323,6 +317,11 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 			if(tabela[i][j]!=0){
 				cont++;
 			}
+			if(tabela[i][j]==2048){
+				system("cls");
+				printf("Parabens %s voce ganhou! Pontuacao: %d\n\n",jogador,pontuacao);
+				return 0;
+			}
 		}
 	}
 	
@@ -336,13 +335,13 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 }
 
 int main(){
-	system("color 0A");//mudar a prompt p preto com verde
+	system("color 0A");
 	
 	int dificuldade;
 		
 	int menu1;
 	do{
-		system("cls");//limpar a tela do prompt
+		system("cls");
 		menu1= menu_jogo();
 		system("cls");
 		
