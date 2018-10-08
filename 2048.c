@@ -2,10 +2,6 @@
 #include<stdlib.h>
 #include<conio.h>
 
-/*
-mudar as cores do prompt para mostrar que o jogador está prestes a perder.
-sequencia de cores:verde, amarelo, vermelho. 
-*/
 
 int menu_jogo(){
 	
@@ -148,14 +144,14 @@ void game_start(char jogador[20]){
 		tabela[lin][col]=r2ou4;
 	}
 
-	funcionamento(tabela,2,0,jogador);
+	funcionamento(tabela,2,0,jogador,0);
 
 	return ;
 }
 
-int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20]){//não testado, terminar o retorno e recursão.
+int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],int pontuacao){//não testado, terminar o retorno e recursão.
 	
-	int lin,col,r2ou4,i,j,pontuacao=0;
+	int lin,col,r2ou4,i,j;
 	char jogada;
 	
 	srand(time(NULL));	
@@ -183,7 +179,7 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20])
 					}
 					
 	//impressão da tabela do jogo
-	printf("Jogador:%s",jogador);
+	printf("Jogador:%s\tPontuacao: %d",jogador,pontuacao);
 		printf("\n ---------------------------------------------------------------\n");
 	for(lin=0;lin<4;lin++){
 		printf("|\t \t|\t \t|\t \t|\t \t|\n|");
@@ -334,7 +330,7 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20])
 		printf("Voce perdeu %s!\nPontuacao: %d \n",jogador,pontuacao);//colocar pontuação
 		return 0;
 	}else{ 
-		return funcionamento(tabela,cont,cont_jogadas+=1,jogador);
+		return funcionamento(tabela,cont,cont_jogadas+=1,jogador,pontuacao);
 	}
 	
 }
