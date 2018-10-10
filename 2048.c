@@ -109,7 +109,6 @@ int dificuldade_jogo(){
 }
 
 void game_start(char jogador[20]){
-	printf("\n\n~jogo iniciado~\n\n");
 	system("cls");
 	int lin,col,i,j,cont=0,tabela[4][4],cont_jogadas=0,pontuacao,inicio,r2ou4;
 	
@@ -142,7 +141,7 @@ void game_start(char jogador[20]){
 	return ;
 }
 
-int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],int pontuacao){//não testado, terminar o retorno e recursão.
+int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],int pontuacao){
 	
 	int lin,col,r2ou4,i,j;
 	char jogada;
