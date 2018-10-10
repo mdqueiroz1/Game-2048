@@ -59,7 +59,6 @@ void recordes(){
 	
 	printf("Pressione enter para voltar.\n");
 	getch();
-	printf("~voltou~");
 	system("cls");
 
 	menu_jogo();//voltar ao menu principal
@@ -185,7 +184,7 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 		printf("\n|\t \t|\t \t|\t \t|\t \t|");
 		printf("\n ---------------------------------------------------------------\n");
 	}
-	printf("%d",cont);
+	
 	do{
 		fflush(stdin);
 		printf("Jogada: ");
@@ -324,7 +323,7 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 		}
 	}
 	
-	if(cont==16){
+	if(cont==15){
 		printf("Voce perdeu %s!\nPontuacao: %d \n",jogador,pontuacao);//colocar pontuação
 		return 0;
 	}else{ 
