@@ -324,7 +324,7 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 	}
 	
 	if(cont==15){
-		printf("Voce perdeu %s!\nPontuacao: %d \n",jogador,pontuacao);//colocar pontuação
+		printf("Voce perdeu %s!\nPontuacao: %d \n",jogador,pontuacao);
 		return 0;
 	}else{ 
 		return funcionamento(tabela,cont,cont_jogadas+=1,jogador,pontuacao);
@@ -357,7 +357,7 @@ int main(){
 				break;
 			}
 		}
-	}while(menu1!=1);//1 inicia o jogo
+	}while(menu1!=1);
 	
 	return 0;
 }
