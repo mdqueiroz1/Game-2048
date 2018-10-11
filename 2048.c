@@ -109,7 +109,7 @@ int dificuldade_jogo(){
 
 void game_start(char jogador[20]){
 	system("cls");
-	int lin,col,i,j,cont=0,tabela[4][4],cont_jogadas=0,pontuacao,inicio,r2ou4;
+	int lin,col,i,j,cont=0,tabela[4][4],cont_jogadas=0,pontuacao,inicio;
 	
 	for(lin=0;lin<4;lin++){
 		for(col=0;col<4;col++){
@@ -123,21 +123,10 @@ void game_start(char jogador[20]){
 		lin=rand()%4;
 		col=rand()%4;
 	}while(tabela[lin][col]!=0);
-		
-	do{
-		r2ou4=rand()%4;
-	}while(r2ou4%2!=0);
-			
-			
-	if(r2ou4 == 0){
-		tabela[lin][col]=2;
-	}else{
-		tabela[lin][col]=r2ou4;
-	}
+
+	tabela[lin][col]=2;
 
 	funcionamento(tabela,2,0,jogador,0);
-
-	return ;
 }
 
 int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],int pontuacao){
