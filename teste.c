@@ -19,20 +19,20 @@ if(tabela[0][0]==tabela[0][1]){
 int main(){
 
 int lin,col,i,j,cont=0,tabela[4][4],cont_jogadas=0,pontuacao,inicio,r2ou4;
-	
+
 	for(lin=0;lin<4;lin++){
 		for(col=0;col<4;col++){
 			tabela[lin][col] = 0;
 		}
 	}
-		
-	srand(time(NULL));
 	
+	srand(time(NULL));
+
 	do{
 		lin=rand()%4;
 		col=rand()%4;
 	}while(tabela[lin][col]!=0);
-		
+
 	tabela[lin][col]=2;
 
 	for(lin=0;lin<4;lin++){//impressao em tela
@@ -53,5 +53,5 @@ int lin,col,i,j,cont=0,tabela[4][4],cont_jogadas=0,pontuacao,inicio,r2ou4;
 	}
 //	funcionamento(tabela,2,0,jogador,0);
 
-	return ;
+	return 0;
 }
