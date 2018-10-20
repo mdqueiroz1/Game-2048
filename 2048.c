@@ -187,16 +187,12 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 		case 'a':{
 		//esquerda(pronto)
 		printf("esquerda\n");
-			for(lin=0;lin<4;lin++){
-				for(i=0;i<4;i++){
-					for(j=1;j<4;j++){
-						if(i!=j){
-							if(tabela[lin][i]==tabela[lin][j]){
-								tabela[lin][j]=tabela[lin][i]+tabela[lin][j];
-								pontuacao=pontuacao+tabela[lin][j];
-								tabela[lin][i]=0;
-							}
-						}
+	for(lin=0;lin<4;lin++){
+				for(i=0;i<3;i++){
+				if(tabela[lin][i]==tabela[lin][i+1]){
+					tabela[lin][i+1]=tabela[lin][i]+tabela[lin][i+1];
+					pontuacao=pontuacao+tabela[lin][j];
+					tabela[lin][i]=0;
 					}
 				}
 				for(i=0;i<4;i++){
@@ -207,22 +203,18 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 						}
 					}
 				}
-			}
+	}
 			break;
 		}
 	
 		case 'd':{
-			//direita(pronto)
+			//direita(teste)
 			for(lin=3;lin>=0;lin--){
 				for(i=3;i>=0;i--){
-					for(j=3;j>=0;j--){
-						if(i!=j){
-							if(tabela[lin][i]==tabela[lin][j]){
-								tabela[lin][j]=tabela[lin][i]+tabela[lin][j];
-								pontuacao=pontuacao+tabela[lin][j];
-								tabela[lin][i]=0;
-							}
-						}
+					if(tabela[lin][i]==tabela[lin][i-1]){
+						tabela[lin][i-1]=tabela[lin][i]+tabela[lin][i-1];
+						pontuacao=pontuacao+tabela[lin][i-1];
+						tabela[lin][i]=0;
 					}
 				}
 				for(i=3;i>=0;i--){
@@ -238,17 +230,13 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 		}
 	
 		case 'w':{
-			//cima(pronto)
+			//cima(teste)
 			for(lin=0;lin<4;lin++){
 				for(i=0;i<4;i++){
-					for(j=1;j<4;j++){
-						if(i!=j){
-							if(tabela[i][lin]==tabela[j][lin]){
-								tabela[j][lin]=tabela[i][lin]+tabela[j][lin];
-								pontuacao=pontuacao+tabela[j][lin];
-								tabela[i][lin]=0;
-							}
-						}
+					if(tabela[i][lin]==tabela[i+1][lin]){
+						tabela[i+1][lin]=tabela[i][lin]+tabela[i+1][lin];
+						pontuacao=pontuacao+tabela[i+1][lin];
+						tabela[i][lin]=0;
 					}
 				}
 				for(i=0;i<4;i++){
@@ -264,17 +252,13 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 		}
 	
 		case 's':{
-			//baixo(pronto)
+			//baixo()
 			for(lin=3;lin>=0;lin--){
 				for(i=3;i>=0;i--){
-					for(j=3;j>=0;j--){
-						if(i!=j){
-							if(tabela[i][lin]==tabela[j][lin]){
-								tabela[j][lin]=tabela[i][lin]+tabela[j][lin];
-								pontuacao=pontuacao+tabela[j][lin];
-								tabela[i][lin]=0;
-							}
-						}
+					if(tabela[i][lin]==tabela[i-1][lin]){
+						tabela[i-1][lin]=tabela[i][lin]+tabela[i-1][lin];
+						pontuacao=pontuacao+tabela[i-1][lin];
+						tabela[i][lin]=0;
 					}
 				}
 				for(i=3;i>=0;i--){
@@ -288,7 +272,7 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 			}
 			break;
 		}
-	
+		
 		case 'p':{
 			//inserir save do jogo
 			return 0;
