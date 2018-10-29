@@ -186,7 +186,6 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 	
 		case 'a':{
 		//esquerda(pronto)
-		printf("esquerda\n");
 	for(lin=0;lin<4;lin++){
 				for(i=0;i<3;i++){
 				if(tabela[lin][i]==tabela[lin][i+1]){
