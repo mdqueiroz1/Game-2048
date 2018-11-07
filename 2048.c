@@ -152,14 +152,14 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 		tabela[lin][col]=r2ou4;
 	}
 	
-	/*if(cont<=8){
+	if(cont<=8){
 		system("color 0A");
 	}else if(cont>8&&cont<15){
 				system("color 0E");
 			}else if(cont>=15){
 						system("color 0C");
 					}
-	*/				
+					
 	//impressão da tabela do jogo
 	printf("Jogador:%s\tPontuacao: %d",jogador,pontuacao);
 		printf("\n ---------------------------------------------------------------\n");
@@ -188,13 +188,12 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 	
 		case 'a':{
 		//esquerda(pronto)
-		printf("esquerda\n");
-	for(lin=0;lin<4;lin++){
+			for(lin=0;lin<4;lin++){
 				for(i=0;i<3;i++){
-				if(tabela[lin][i]==tabela[lin][i+1]){
-					tabela[lin][i+1]=tabela[lin][i]+tabela[lin][i+1];
-					pontuacao=pontuacao+tabela[lin][j];
-					tabela[lin][i]=0;
+					if(tabela[lin][i]==tabela[lin][i+1]){
+						tabela[lin][i+1]=tabela[lin][i]+tabela[lin][i+1];
+						pontuacao=pontuacao+tabela[lin][i+1];
+						tabela[lin][i]=0;
 					}
 				}
 				for(i=0;i<4;i++){
@@ -202,10 +201,10 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 						if(tabela[lin][j]==0){
 							tabela[lin][j]=tabela[lin][j+1];
 							tabela[lin][j+1]=0;
-						}
+							}
 					}
 				}
-	}
+			}
 			break;
 		}
 	
@@ -308,7 +307,7 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 }
 
 int main(){
-	//system("color 0A");
+	system("color 0A");
 	
 	int dificuldade;
 		
