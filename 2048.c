@@ -2,8 +2,9 @@
 
 #include<stdio.h>
 #include<stdlib.h>
-//#include<conio.h>
+#include<conio.h>
 
+int dificuldade;
 
 int menu_jogo(){
 	
@@ -105,7 +106,8 @@ int dificuldade_jogo(){
 		fflush(stdin);
 		scanf("%c",&confirma_dificuldade);
 	}while(confirma_dificuldade!= 'S'&&confirma_dificuldade!= 's');
-	
+		
+		
 		return dificuldade;
 }
 
@@ -308,8 +310,6 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 
 int main(){
 	system("color 0A");
-	
-	int dificuldade;
 		
 	int menu1;
 	do{
