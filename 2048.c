@@ -4,7 +4,7 @@
 #include<stdlib.h>
 #include<conio.h>
 
-int dificuldade;
+	int tam_jogo=4;
 
 int menu_jogo(){
 	
@@ -69,8 +69,8 @@ void recordes(){
 	return ;
 }
 
-int dificuldade_jogo(){
-	
+void dificuldade_jogo(){
+
 	int dificuldade;
 	char confirma_dificuldade;
 	
@@ -94,29 +94,31 @@ int dificuldade_jogo(){
 		
 		if(dificuldade==1){
 			printf("Vejo que temos um bebezao por aqui!\n");
+			tam_jogo=6;
 		}
 		if(dificuldade==2){
 			printf("Esta com medo de jogar no dificil, frutinha?\n");
+			tam_jogo=5;		
 		}
 		if(dificuldade==3){
-		printf("Mas ce eh o bixao mesmo hein!?\n");
+			printf("Mas ce eh o bixao mesmo hein!?\n");
+			tam_jogo=4;
 		}
 		
 		printf("Voce selecionou a dificuldade %d, esta correto?(S/N)\n",dificuldade);
 		fflush(stdin);
 		scanf("%c",&confirma_dificuldade);
 	}while(confirma_dificuldade!= 'S'&&confirma_dificuldade!= 's');
-		
-		
-		return dificuldade;
+
+		return ;
 }
 
 void game_start(char jogador[20]){
 	system("cls");
-	int lin,col,i,j,cont=0,tabela[4][4],cont_jogadas=0,pontuacao,inicio;
+	int lin,col,i,j,cont=0,tabela[tam_jogo][tam_jogo],cont_jogadas=0,pontuacao,inicio;
 	
-	for(lin=0;lin<4;lin++){
-		for(col=0;col<4;col++){
+	for(lin=0;lin<tam_jogo;lin++){
+		for(col=0;col<tam_jogo;col++){
 			tabela[lin][col] = 0;
 		}
 	}
@@ -124,8 +126,8 @@ void game_start(char jogador[20]){
 	srand(time(NULL));
 	
 	do{
-		lin=rand()%4;
-		col=rand()%4;
+		lin=rand()%tam_jogo;
+		col=rand()%tam_jogo;
 	}while(tabela[lin][col]!=0);
 
 	tabela[lin][col]=2;
@@ -133,15 +135,15 @@ void game_start(char jogador[20]){
 	funcionamento(tabela,2,0,jogador,0);
 }
 
-int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],int pontuacao){
+int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,char jogador[20],int pontuacao){
 	
 	int lin,col,r2ou4,i,j;
 	char jogada;
 	
 	srand(time(NULL));	
 	do{
-		lin=rand()%4;
-		col=rand()%4;
+		lin=rand()%tam_jogo;
+		col=rand()%tam_jogo;
 	}while(tabela[lin][col]!=0);
 
 	do{
@@ -154,20 +156,22 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 		tabela[lin][col]=r2ou4;
 	}
 	
-	if(cont<=8){
+	if(cont<=((tam_jogo*tam_jogo)-(tam_jogo+tam_jogo+1))){
 		system("color 0A");
-	}else if(cont>8&&cont<15){
+	}else if(cont>(((tam_jogo*tam_jogo)-(tam_jogo+tam_jogo))&&cont<((tam_jogo*tam_jogo))-1)){
 				system("color 0E");
-			}else if(cont>=15){
+			}else if(cont>=((tam_jogo*tam_jogo))){
 						system("color 0C");
 					}
 					
 	//impressão da tabela do jogo
+
 	printf("Jogador:%s\tPontuacao: %d",jogador,pontuacao);
 		printf("\n ---------------------------------------------------------------\n");
-	for(lin=0;lin<4;lin++){
+		
+	for(lin=0;lin<tam_jogo;lin++){
 		printf("|\t \t|\t \t|\t \t|\t \t|\n|");
-		for(col=0;col<4;col++){
+		for(col=0;col<tam_jogo;col++){
 			if(tabela[lin][col] == 0){
 				printf("\t \t|");
 			}else{
@@ -181,7 +185,7 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 	do{
 		fflush(stdin);
 		printf("Jogada: ");
-		scanf("%c",&jogada);
+		jogada=getch();
 		jogada=tolower(jogada);
 		fflush(stdin);
 	}while(jogada!='a' && jogada!='s'&& jogada!='d'&& jogada!='w' && jogada!='p');
@@ -190,16 +194,16 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 	
 		case 'a':{
 		//esquerda(pronto)
-			for(lin=0;lin<4;lin++){
-				for(i=0;i<3;i++){
+			for(lin=0;lin<tam_jogo;lin++){
+				for(i=0;i<tam_jogo-1;i++){
 					if(tabela[lin][i]==tabela[lin][i+1]){
 						tabela[lin][i+1]=tabela[lin][i]+tabela[lin][i+1];
 						pontuacao=pontuacao+tabela[lin][i+1];
 						tabela[lin][i]=0;
 					}
 				}
-				for(i=0;i<4;i++){
-					for(j=0;j<3;j++){
+				for(i=0;i<tam_jogo;i++){
+					for(j=0;j<tam_jogo-1;j++){
 						if(tabela[lin][j]==0){
 							tabela[lin][j]=tabela[lin][j+1];
 							tabela[lin][j+1]=0;
@@ -212,16 +216,16 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 	
 		case 'd':{
 			//direita(teste)
-			for(lin=3;lin>=0;lin--){
-				for(i=3;i>=0;i--){
+			for(lin=tam_jogo-1;lin>=0;lin--){
+				for(i=tam_jogo-1;i>=0;i--){
 					if(tabela[lin][i]==tabela[lin][i-1]){
 						tabela[lin][i-1]=tabela[lin][i]+tabela[lin][i-1];
 						pontuacao=pontuacao+tabela[lin][i-1];
 						tabela[lin][i]=0;
 					}
 				}
-				for(i=3;i>=0;i--){
-					for(j=3;j>=1;j--){
+				for(i=tam_jogo-1;i>=0;i--){
+					for(j=tam_jogo-1;j>=1;j--){
 						if(tabela[lin][j]==0){
 							tabela[lin][j]=tabela[lin][j-1];
 							tabela[lin][j-1]=0;
@@ -234,16 +238,16 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 	
 		case 'w':{
 			//cima(teste)
-			for(lin=0;lin<4;lin++){
-				for(i=0;i<4;i++){
+			for(lin=0;lin<tam_jogo;lin++){
+				for(i=0;i<tam_jogo;i++){
 					if(tabela[i][lin]==tabela[i+1][lin]){
 						tabela[i+1][lin]=tabela[i][lin]+tabela[i+1][lin];
 						pontuacao=pontuacao+tabela[i+1][lin];
 						tabela[i][lin]=0;
 					}
 				}
-				for(i=0;i<4;i++){
-					for(j=0;j<3;j++){
+				for(i=0;i<tam_jogo;i++){
+					for(j=0;j<tam_jogo-1;j++){
 						if(tabela[j][lin]==0){
 							tabela[j][lin]=tabela[j+1][lin];
 							tabela[j+1][lin]=0;
@@ -256,16 +260,16 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 	
 		case 's':{
 			//baixo()
-			for(lin=3;lin>=0;lin--){
-				for(i=3;i>=0;i--){
+			for(lin=tam_jogo-1;lin>=0;lin--){
+				for(i=tam_jogo-1;i>=0;i--){
 					if(tabela[i][lin]==tabela[i-1][lin]){
 						tabela[i-1][lin]=tabela[i][lin]+tabela[i-1][lin];
 						pontuacao=pontuacao+tabela[i-1][lin];
 						tabela[i][lin]=0;
 					}
 				}
-				for(i=3;i>=0;i--){
-					for(j=3;j>=1;j--){
+				for(i=tam_jogo-1;i>=0;i--){
+					for(j=tam_jogo-1;j>=1;j--){
 						if(tabela[j][lin]==0){
 							tabela[j][lin]=tabela[j-1][lin];
 							tabela[j-1][lin]=0;
@@ -286,8 +290,8 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 	system("cls");
 	
 	cont=0;//contagem de espacos vazios
-	for(i=0;i<4;i++){
-		for(j=0;j<4;j++){
+	for(i=0;i<tam_jogo;i++){
+		for(j=0;j<tam_jogo;j++){
 			if(tabela[i][j]!=0){
 				cont++;
 			}
@@ -299,7 +303,7 @@ int funcionamento(int tabela[4][4], int cont, int cont_jogadas,char jogador[20],
 		}
 	}
 	
-	if(cont==15){
+	if(cont==(tam_jogo*tam_jogo)){
 		printf("Voce perdeu %s!\nPontuacao: %d \n",jogador,pontuacao);
 		return 0;
 	}else{ 
@@ -327,7 +331,7 @@ int main(){
 				break;
 			}
 			case 3:{
-				dificuldade=dificuldade_jogo();
+				dificuldade_jogo();
 				break;
 			}
 		}
