@@ -4,7 +4,7 @@
 #include<stdlib.h>
 #include<conio.h>
 
-	int tam_jogo=4;
+	int tam_jogo=5,pontuacao=0;
 
 int menu_jogo(){
 	
@@ -52,16 +52,68 @@ void inicio_jogo(){
 	}
 }
 
-void recordes(){
-	printf("--------------------------------\n");
-	printf("Recordes:\n");
-	printf("1o - %s\t%d\n");//adicionar usuário do jogo já salvo e recorde do mesmo.
-	printf("2o - %s\t%d\n");
-	printf("3o - %s\t%d\n");
-	printf("--------------------------------\n");
+void recordes(char jogador[20]){
+	
+	FILE* f;
+	char usuario1[20],usuario2[20],usuario3[20];
+	int p1,p2,p3,i,novorecorde;
+	
+	f= fopen("recordes.txt", "r");
+	if(f == NULL){
+ 		printf("Erro na abertura!\n");
+ 		exit(1);
+ 	}
+	
+	if(pontuacao!=0){
+		fscanf(f,"%s %d",usuario1,&p1);
+		if(pontuacao>p1){
+		p1=pontuacao;
+		strcpy(usuario1,jogador);
+		}else{
+			fscanf(f,"%s %d",usuario2,&p2);
+			if(pontuacao>p2){
+				p2=pontuacao;
+				strcpy(usuario2,jogador);
+			}else{
+				fscanf(f,"%s %d",usuario3,&p3);
+				if(pontuacao>p3){
+				p3=pontuacao;
+				strcpy(usuario3,jogador);
+				}
+		 	}
+		}
+		fclose(f);
+		f= fopen("recordes.txt","w");
+		if(f == NULL){
+		printf("Erro na abertura!\n");
+		exit(1);
+		}
+ 		
+		fprintf(f,"%s %d\n",usuario1,p1);
+		fprintf(f,"%s %d\n",usuario2,p2);
+		fprintf(f,"%s %d\n",usuario3,p3);
+		fclose(f);
+	}
+		f= fopen("recordes.txt", "r");
+		if(f == NULL){
+ 			printf("Erro na abertura!\n");
+ 			exit(1);
+ 		}
+ 		
+		printf("--------------------------------\n");
+		printf("Recordes:\n");
+		fscanf(f,"%s %d",usuario1,&p1);
+		printf("1o - %s\t%d\n",usuario1,p1);
+		fscanf(f,"%s %d",usuario2,&p2);
+		printf("2o - %s\t%d\n",usuario2,p2);
+		fscanf(f,"%s %d",usuario3,&p3);
+		printf("3o - %s\t%d\n",usuario3,p3);
+		printf("--------------------------------\n");
+	
 	
 	printf("Pressione enter para voltar.\n");
 	getch();
+	fclose(f);
 	system("cls");
 
 	menu_jogo();//voltar ao menu principal
@@ -115,7 +167,7 @@ void dificuldade_jogo(){
 
 void game_start(char jogador[20]){
 	system("cls");
-	int lin,col,i,j,cont=0,tabela[tam_jogo][tam_jogo],cont_jogadas=0,pontuacao,inicio;
+	int lin,col,i,j,cont=0,tabela[tam_jogo][tam_jogo],cont_jogadas=0,inicio;
 	
 	for(lin=0;lin<tam_jogo;lin++){
 		for(col=0;col<tam_jogo;col++){
@@ -167,10 +219,22 @@ int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,cha
 	//impressão da tabela do jogo
 
 	printf("Jogador:%s\tPontuacao: %d",jogador,pontuacao);
-		printf("\n ---------------------------------------------------------------\n");
-		
+		printf("\n ---------------------------------------------------------------");
+		if(tam_jogo==6){
+			printf("--------------------------------");
+		}else if(tam_jogo == 5){
+				printf("----------------");
+			}
+		printf("\n");
 	for(lin=0;lin<tam_jogo;lin++){
-		printf("|\t \t|\t \t|\t \t|\t \t|\n|");
+		printf("|");
+		
+		if(tam_jogo==6){
+		printf("\t \t|\t \t|");
+		}else if(tam_jogo==5){
+				printf("\t \t|");
+			}
+		printf("\t \t|\t \t|\t \t|\t \t|\n|");
 		for(col=0;col<tam_jogo;col++){
 			if(tabela[lin][col] == 0){
 				printf("\t \t|");
@@ -179,7 +243,19 @@ int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,cha
 			}
 		}
 		printf("\n|\t \t|\t \t|\t \t|\t \t|");
-		printf("\n ---------------------------------------------------------------\n");
+		if(tam_jogo==6){
+		printf("\t \t|\t \t|");
+		}else if(tam_jogo==5){
+				printf("\t \t|");
+			}
+		
+		printf("\n ---------------------------------------------------------------");
+		if(tam_jogo==6){
+			printf("--------------------------------");
+		}else if(tam_jogo == 5){
+				printf("----------------");
+			}
+		printf("\n");
 	}
 	
 	do{
@@ -298,7 +374,7 @@ int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,cha
 			if(tabela[i][j]==2048){
 				system("cls");
 				printf("Parabens %s voce ganhou! Pontuacao: %d\n\n",jogador,pontuacao);
-				return 0;
+				return recordes(jogador);
 			}
 		}
 	}
