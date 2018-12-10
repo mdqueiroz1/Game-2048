@@ -3,8 +3,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<conio.h>
+#include<string.h>
 
-	int tam_jogo=5,pontuacao=0;
+	int tam_jogo=3,pontuacao=0;
+	char jogador[20];
 
 int menu_jogo(){
 	
@@ -52,7 +54,7 @@ void inicio_jogo(){
 	}
 }
 
-void recordes(char jogador[20]){
+char recordes(char jogador[20]){
 	
 	FILE* f;
 	char usuario1[20],usuario2[20],usuario3[20];
@@ -403,7 +405,7 @@ int main(){
 				break;
 					}
 			case 2:{
-				recordes();
+				recordes(jogador);
 				break;
 			}
 			case 3:{
