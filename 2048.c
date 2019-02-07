@@ -5,7 +5,9 @@
 #include<conio.h>
 #include<string.h>
 
-	int tam_jogo=3,pontuacao=0;
+#define EXIT_ERROR 1
+
+	int tam_jogo=4,pontuacao=0;
 	char jogador[20];
 
 int menu_jogo(){
@@ -32,15 +34,17 @@ int menu_jogo(){
 
 void inicio_jogo(){
 
-	char usuario[20],confirma_usuario,save_usuario[20];
+	char confirma_usuario,save_usuario[20];
 	void game_start();
 	
 	printf("Bem Vindo!\n");
 	printf("Informe o nome de usuario:\n");
 	fflush(stdin);
-	gets(usuario);
-
-	if(usuario==save_usuario){
+	gets(jogador);
+	
+	
+	
+	if(jogador==save_usuario){
 		printf("Deseja carregar jogo salvo?(S/N)");
 		scanf("%c", &confirma_usuario);
 		if(confirma_usuario=='s'||confirma_usuario=='S'){
@@ -50,7 +54,7 @@ void inicio_jogo(){
 		printf("Instrucoes: \n\n\tW - Cima\n\nA - Esquerda\tD - Direita\n\n\tS - Baixo\n\nP - Salvar e sair\n");
 		printf("Pressione enter para continuar.\n");
 		getch();
-		game_start(usuario);
+		game_start(jogador);
 	}
 }
 
@@ -60,10 +64,10 @@ char recordes(char jogador[20]){
 	char usuario1[20],usuario2[20],usuario3[20];
 	int p1,p2,p3,i,novorecorde;
 	
-	f= fopen("recordes.txt", "r");
-	if(f == NULL){
+	
+	if((f= fopen("recordes.txt", "r+")) == NULL){
  		printf("Erro na abertura!\n");
- 		exit(1);
+ 		exit(EXIT_ERROR);
  	}
 	
 	if(pontuacao!=0){
@@ -85,24 +89,18 @@ char recordes(char jogador[20]){
 		 	}
 		}
 		fclose(f);
-		f= fopen("recordes.txt","w");
-		if(f == NULL){
-		printf("Erro na abertura!\n");
-		exit(1);
+		if ((f= fopen("recordes.txt","w"))==null){
+			printf("Erro na abertura!\n");
+			sleep(2);
+			exit(EXIT_ERROR);
 		}
  		
 		fprintf(f,"%s %d\n",usuario1,p1);
 		fprintf(f,"%s %d\n",usuario2,p2);
 		fprintf(f,"%s %d\n",usuario3,p3);
 		fclose(f);
-	}
-		f= fopen("recordes.txt", "r");
-		if(f == NULL){
- 			printf("Erro na abertura!\n");
- 			exit(1);
- 		}
- 		
-		printf("--------------------------------\n");
+	}else{
+ 		printf("--------------------------------\n");
 		printf("Recordes:\n");
 		fscanf(f,"%s %d",usuario1,&p1);
 		printf("1o - %s\t%d\n",usuario1,p1);
@@ -111,6 +109,7 @@ char recordes(char jogador[20]){
 		fscanf(f,"%s %d",usuario3,&p3);
 		printf("3o - %s\t%d\n",usuario3,p3);
 		printf("--------------------------------\n");
+	}
 	
 	
 	printf("Pressione enter para voltar.\n");
@@ -158,8 +157,13 @@ void dificuldade_jogo(){
 			printf("Mas ce eh o bixao mesmo hein!?\n");
 			tam_jogo=4;
 		}
-		
-		printf("Voce selecionou a dificuldade %d, esta correto?(S/N)\n",dificuldade);
+		if(dificuldade==1){
+			printf("Voce selecionou a dificuldade facil, esta correto?(S/N)\n");
+		}else if(dificuldade==2){
+				printf("Voce selecionou a dificuldade medio, esta correto?(S/N)\n");
+				}else if(dificuldade==3){
+					printf("Voce selecionou a dificuldade dificil, esta correto?(S/N)\n");	
+					}
 		fflush(stdin);
 		scanf("%c",&confirma_dificuldade);
 	}while(confirma_dificuldade!= 'S'&&confirma_dificuldade!= 's');
