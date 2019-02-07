@@ -6,6 +6,7 @@
 #include<string.h>
 
 #define EXIT_ERROR 1
+#define EXIT_SUCCESS 0
 
 	int tam_jogo=4,pontuacao=0;
 	char jogador[20];
@@ -222,7 +223,7 @@ int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,cha
 						system("color 0C");
 					}
 					
-	//impressão da tabela do jogo
+	//impressï¿½o da tabela do jogo
 
 	printf("Jogador:%s\tPontuacao: %d",jogador,pontuacao);
 		printf("\n ---------------------------------------------------------------");
