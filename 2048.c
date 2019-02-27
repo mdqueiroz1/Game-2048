@@ -59,38 +59,37 @@ void inicio_jogo(){
 	}
 }
 
-char recordes(char jogador[20]){
+char recordes(char jogador[20], int pontuacao){
 	
 	FILE* f;
 	char usuario1[20],usuario2[20],usuario3[20];
-	int p1,p2,p3,i,novorecorde;
+	int p1,p2,p3,i;
 	
 	
-	if((f= fopen("recordes.txt", "r+")) == NULL){
+	if((f= fopen("recordes", "r")) == NULL){
  		printf("Erro na abertura!\n");
  		exit(EXIT_ERROR);
  	}
 	
 	if(pontuacao!=0){
+
 		fscanf(f,"%s %d",usuario1,&p1);
+		fscanf(f,"%s %d",usuario2,&p2);
+		fscanf(f,"%s %d",usuario3,&p3);
+
 		if(pontuacao>p1){
-		p1=pontuacao;
-		strcpy(usuario1,jogador);
-		}else{
-			fscanf(f,"%s %d",usuario2,&p2);
-			if(pontuacao>p2){
-				p2=pontuacao;
-				strcpy(usuario2,jogador);
-			}else{
-				fscanf(f,"%s %d",usuario3,&p3);
-				if(pontuacao>p3){
-				p3=pontuacao;
-				strcpy(usuario3,jogador);
-				}
-		 	}
-		}
+			p1=pontuacao;
+			strcpy(usuario1,jogador);
+		}else if(pontuacao>p2){
+					p2=pontuacao;
+					strcpy(usuario2,jogador);
+				}else	if(pontuacao>p3){
+							p3=pontuacao;
+							strcpy(usuario3,jogador);
+						}
 		fclose(f);
-		if ((f= fopen("recordes.txt","w"))==null){
+
+		if ((f= fopen("recordes","w")) == NULL){
 			printf("Erro na abertura!\n");
 			sleep(2);
 			exit(EXIT_ERROR);
@@ -110,6 +109,8 @@ char recordes(char jogador[20]){
 		fscanf(f,"%s %d",usuario3,&p3);
 		printf("3o - %s\t%d\n",usuario3,p3);
 		printf("--------------------------------\n");
+		
+		
 	}
 	
 	
@@ -197,7 +198,7 @@ void game_start(char jogador[20]){
 int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,char jogador[20],int pontuacao){
 	
 	int lin,col,r2ou4,i,j;
-	char jogada;
+	char jogada, verifica_recorde;
 	
 	srand(time(NULL));	
 	do{
@@ -381,14 +382,14 @@ int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,cha
 			if(tabela[i][j]==2048){
 				system("cls");
 				printf("Parabens %s voce ganhou! Pontuacao: %d\n\n",jogador,pontuacao);
-				return recordes(jogador);
+				return recordes(jogador, pontuacao);
 			}
 		}
 	}
 	
 	if(cont==(tam_jogo*tam_jogo)){
 		printf("Voce perdeu %s!\nPontuacao: %d \n",jogador,pontuacao);
-		return 0;
+		return recordes(jogador, pontuacao);
 	}else{ 
 		return funcionamento(tabela,cont,cont_jogadas+=1,jogador,pontuacao);
 	}
@@ -410,7 +411,7 @@ int main(){
 				break;
 					}
 			case 2:{
-				recordes(jogador);
+				recordes(jogador,pontuacao);
 				break;
 			}
 			case 3:{
