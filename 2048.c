@@ -15,14 +15,25 @@ int menu_jogo(){
 	
 	int menu1;
 	
-	printf("--------------------------------\n");//30linhas
-	printf("--------------MENU--------------\n");
-	printf("--------------------------------\n");
-	printf("1- Iniciar Jogo\n");
-	printf("2- Ver Recordes\n");
-	printf("3- Definir Dificuldade\n");
-	printf("--------------------------------\n");
+	printf(" ---------------------------------------------\n");
+	printf(" ---------------------------------------------\n");
+	printf("|| .d8888b.   .d8888b.      d8888   .d8888b. ||\n");  
+	printf("||d88P  Y88b d88P  Y88b    d8P888  d88P  Y88b||\n"); 
+	printf("||       888 888    888   d8P 888  Y88b. d88P||\n");  
+	printf("||     .d88P 888    888  d8P  888   \"Y88888\" ||\n");  
+	printf("||  .od888P\" 888    888 d88   888  .d8P\"\"Y8b.||\n"); 
+	printf("|| d88P\"     888    888 8888888888 888    888||\n");
+	printf("||888\"       Y88b  d88P       888  Y88b  d88P||\n"); 
+	printf("||888888888   \"Y8888P\"        888   \"Y8888P\" ||\n");
+	printf(" ---------------------------------------------\n");
+	printf(" --------------------MENU---------------------\n");
+	printf(" ---------------------------------------------\n");
+	printf("\t\t1- Iniciar Jogo\n");
+	printf("\t\t2- Ver Recordes\n");
+	printf("\t    3- Definir Dificuldade\n");
+	printf(" ---------------------------------------------\n");	
 	do{
+		fflush(stdin);
 		scanf("%d", &menu1);
 		if(menu1<=0||menu1>4){
 			printf("Numero de menu invalido.\n");
@@ -35,7 +46,7 @@ int menu_jogo(){
 
 void inicio_jogo(){
 
-	char confirma_usuario,save_usuario[20];
+	char confirma_usuario, save_usuario[20];
 	void game_start();
 	
 	printf("Bem Vindo!\n");
@@ -102,12 +113,16 @@ char recordes(char jogador[20], int pontuacao){
 	}else{
  		printf("--------------------------------\n");
 		printf("Recordes:\n");
+		
 		fscanf(f,"%s %d",usuario1,&p1);
 		printf("1o - %s\t%d\n",usuario1,p1);
+		
 		fscanf(f,"%s %d",usuario2,&p2);
 		printf("2o - %s\t%d\n",usuario2,p2);
+		
 		fscanf(f,"%s %d",usuario3,&p3);
 		printf("3o - %s\t%d\n",usuario3,p3);
+		
 		printf("--------------------------------\n");
 		
 		
@@ -200,7 +215,7 @@ int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,cha
 	int lin,col,r2ou4,i,j;
 	char jogada, verifica_recorde;
 	
-	srand(time(NULL));	
+	srand(time(NULL));
 	do{
 		lin=rand()%tam_jogo;
 		col=rand()%tam_jogo;
@@ -224,7 +239,7 @@ int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,cha
 						system("color 0C");
 					}
 					
-	//impress�o da tabela do jogo
+	//impressao da tabela do jogo
 
 	printf("Jogador:%s\tPontuacao: %d",jogador,pontuacao);
 		printf("\n ---------------------------------------------------------------");
@@ -277,7 +292,7 @@ int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,cha
 	switch(jogada){
 	
 		case 'a':{
-		//esquerda(pronto)
+		//esquerda
 			for(lin=0;lin<tam_jogo;lin++){
 				for(i=0;i<tam_jogo-1;i++){
 					if(tabela[lin][i]==tabela[lin][i+1]){
@@ -299,7 +314,7 @@ int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,cha
 		}
 	
 		case 'd':{
-			//direita(teste)
+			//direita
 			for(lin=tam_jogo-1;lin>=0;lin--){
 				for(i=tam_jogo-1;i>=0;i--){
 					if(tabela[lin][i]==tabela[lin][i-1]){
@@ -321,7 +336,7 @@ int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,cha
 		}
 	
 		case 'w':{
-			//cima(teste)
+			//cima
 			for(lin=0;lin<tam_jogo;lin++){
 				for(i=0;i<tam_jogo;i++){
 					if(tabela[i][lin]==tabela[i+1][lin]){
@@ -343,7 +358,7 @@ int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,cha
 		}
 	
 		case 's':{
-			//baixo()
+			//baixo
 			for(lin=tam_jogo-1;lin>=0;lin--){
 				for(i=tam_jogo-1;i>=0;i--){
 					if(tabela[i][lin]==tabela[i-1][lin]){
@@ -366,6 +381,7 @@ int funcionamento(int tabela[tam_jogo][tam_jogo], int cont, int cont_jogadas,cha
 		
 		case 'p':{
 			//inserir save do jogo
+
 			return 0;
 			break;
 		}
@@ -423,6 +439,3 @@ int main(){
 	
 	return 0;
 }
-
-
-
