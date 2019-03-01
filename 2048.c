@@ -105,10 +105,20 @@ char recordes(char jogador[20], int pontuacao){
 			sleep(2);
 			exit(EXIT_ERROR);
 		}
- 		
+ 		printf("--------------------------------\n");
+		printf("Recordes:\n");
 		fprintf(f,"%s %d\n",usuario1,p1);
+		printf("1o - %s\t%d\n",usuario1,p1);
+		
 		fprintf(f,"%s %d\n",usuario2,p2);
+		printf("2o - %s\t%d\n",usuario2,p2);
+		
 		fprintf(f,"%s %d\n",usuario3,p3);
+		printf("3o - %s\t%d\n",usuario3,p3);
+		
+		printf("--------------------------------\n");
+		printf("Pressione ENTER para voltar.\n");
+		getch();
 		fclose(f);
 	}else{
  		printf("--------------------------------\n");
@@ -124,18 +134,14 @@ char recordes(char jogador[20], int pontuacao){
 		printf("3o - %s\t%d\n",usuario3,p3);
 		
 		printf("--------------------------------\n");
-		
-		
+		printf("Pressione enter para voltar.\n");
+		getch();
 	}
-	
-	
-	printf("Pressione enter para voltar.\n");
-	getch();
+		
 	fclose(f);
+	printf("FIM DE JOGO!\n\n");
+	sleep(4);
 	system("cls");
-
-	menu_jogo();//voltar ao menu principal
-
 	return ;
 }
 
